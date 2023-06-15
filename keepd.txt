@@ -1,0 +1,15 @@
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cd) => {
+        cd(null, 'public/img/users')
+    },
+    filename: (req, file, cd) => {
+        const extension = file.mimetype.split('/')[1];
+        cd(null, `user-${Date.now()}.${extension}`);
+    }
+})
+
+const uploads = multer({
+    storage: multerStorage
+})
+// creating a middleware for the image testing 
+exports.uploadsUserPhoto = uploads.single('test')
