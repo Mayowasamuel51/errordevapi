@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema, model } = require('mongoose');
 // developerurl is the portfollio to there site
+const rand = Math.floor( Math.random()  *2)
 const Url = new Schema({
     // user_id: {
     //     type: mongoose.Schema.Types.ObjectId,
@@ -16,6 +17,10 @@ const Url = new Schema({
     },
     webname: {
         type: String
+    },
+    ids: {
+        type: Number,
+        default:rand
     },
     about: {
         type: String,

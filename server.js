@@ -5,8 +5,12 @@ const mongoose = require('mongoose')
 mongoose.set('strictQuery', false)
 const path = require('path')
 const cors = require('cors')
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+// app.use(express.json())
+// app.use(express.urlencoded({ extended: false }))
+
+// Increase the limit to 50mb
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 const dotenv = require('dotenv')
 const dotenvb = require('dotenv').config()
@@ -37,12 +41,14 @@ app.use((req, res) => {
 })
 // global error
 app.use((error, req, res, next) => {
+ 
     if (res.headerSent) {
+        console.error(error.stack);
         return next(error)
     }
     res.status(error.code || 500)
     res.json({message: error.message || 'An unknown error occurred!'});
 })
-app.listen(process.env.PORT, () => {
+app.listen(8000 || process.env.PORT, () => {
     console.log('Server listening..................')
 })
