@@ -18,11 +18,7 @@ mongoose.connect(process.env.MONOGODB).then(() => {
     console.log('database connected')
 }).catch((err) => console.log(err))
 
-const { engine } = require('express-handlebars');
-// multiple layout below
-app.engine('hbs', engine({ extname: '.hbs', defaultLayout: "index" }));
-// app.engine('hbs', engine({ extname: '.hbs', defaultLayout: "admin" }));
-app.set('view engine', 'hbs');
+
 
 // for frontend apps
 app.use(cors())
